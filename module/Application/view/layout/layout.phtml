@@ -50,6 +50,6 @@
                 <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
             </footer>
         </div> <!-- /container -->
-        <?php echo $this->inlineScript() ?>
+        <?php echo $this->inlineScript()->prependFile($this->basePath() . '/js/main.js') ?>
     </body>
 </html>

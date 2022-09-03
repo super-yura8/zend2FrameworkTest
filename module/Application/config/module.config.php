@@ -17,7 +17,21 @@ return array(
                     'route'    => '/',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Event',
-                        'action'     => 'index',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+            'event' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/event/[:id]',
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Event',
+                        'action' => 'get',
+                        'id' => 1
                     ),
                 ),
             ),
