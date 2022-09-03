@@ -16,7 +16,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
+                        'controller' => 'Application\Controller\Event',
                         'action'     => 'index',
                     ),
                 ),
@@ -31,7 +31,7 @@ return array(
                     'route'    => '/application',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
+                        'controller'    => 'Event',
                         'action'        => 'index',
                     ),
                 ),
@@ -74,7 +74,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Event' => 'Application\Controller\EventController'
         ),
     ),
     'view_manager' => array(

@@ -1,0 +1,40 @@
+<div class="row">
+    <?php
+    foreach ($events as $event) {
+    ?>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?php echo $event->getName(); ?></h3>
+            </div>
+            <div class="panel-body">
+                <p><?php echo $event->getShortDescription(); ?></p>
+                <p><button class="btn btn-success pull-right" data-toggle="modal" data-target="#exampleModalCenter">See detail &raquo;</button></p>
+            </div>
+            <div class="panel-footer text-muted">
+                <?php echo $event->getDate()->format('Y-m-d H:i');?>
+            </div>
+        </div>
+    </div>
+    <?php }?>
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
