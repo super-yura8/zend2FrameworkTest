@@ -12,5 +12,27 @@
  */
 
 return array(
-    // ...
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'params' => [
+                    'host'     => '127.0.0.1',
+                    'port'     => '8889',
+                    'user'     => 'root',
+                    'password' => 'new-password',
+                    'dbname'   => 'test',
+                    'charset'  => 'utf8',
+                ]
+            ],
+        ],
+        'migrations_configuration' => [
+            'orm_default' => [
+                'name' => 'Application Migrations',
+                'directory' => __DIR__ . '/../../migrations',
+                'namespace' => 'Applications\Migrations',
+                'table_name' => 'doctrine_migrations'
+            ]
+        ]
+    ],
 );
