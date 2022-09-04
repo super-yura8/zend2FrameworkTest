@@ -2,7 +2,9 @@
 
 namespace Application\Model\Entity;
 
+use App\Entity\TransportStart;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
 
 /**
  * @ORM\Entity
@@ -36,6 +38,16 @@ class Event
      * @ORM\Column(type="datetime")
      */
     private $date;
+
+    /**
+     * Many Groups have Many Users.
+     * @ORM\OneToMany(targetEntity="Client", mappedBy="event")
+     */
+    private $clients;
+
+    public function __construct() {
+        $this->clients = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function getId()
     {
@@ -88,5 +100,20 @@ class Event
         $this->date = $date;
 
         return $this;
+    }
+
+    public function setClient(Client $client)
+    {
+        if (!$this->clients->contains($client)) {
+            $this->clients->add($client);
+            $client->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function getClients()
+    {
+        return $this->clients;
     }
 }

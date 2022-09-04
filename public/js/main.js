@@ -1,31 +1,15 @@
 $(document).ready(function(){
     $('.modalInfoShow').on('click', function (e) {
-        e.preventDefault()
-        $('#modalInfoTitle').text($(this).parent().parent().siblings('.panel-heading').find('.panel-title').text())
-        var id = $(this).parent().parent().parent().parent().data('id')
+        e.preventDefault();
+        var id = $(this).parent().parent().parent().parent().data('id');
+        $('#modalInfoTitle').text($(this).parent().parent().siblings('.panel-heading').find('.panel-title').text());       $('#modalInfoTitle').text($(this).parent().parent().siblings('.panel-heading').find('.panel-title').text())
+        $('#client input[name="event"]').val(id);
+
         $.ajax({
-            url: '/event/' + id,
+            url: '/events/' + id,
             success: function (e) {
-                console.log(e)
                 $('#fullDescription').text(e.description)
             }
         })
-    })
-
-    $('#clientForm').on('submit', function (e) {
-        e.preventDefault()
-
-        var form = $(this);
-        var url = form.attr('action');
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: form.serialize(),
-            success: function(data)
-            {
-                alert(data);
-            }
-        });
     })
 });

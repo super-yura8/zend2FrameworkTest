@@ -30,20 +30,27 @@
                 <div class="modal-body">
                     <p id="fullDescription"></p>
                     <br>
+                    <?php
+                    echo $this->form()->openTag($form);
+                    ?>
                     <form id="clientForm">
+                        <?php echo $this->formRow($form->get('event')); ?>
                         <div class="form-group">
                             <label for="clientFormFullName">Full name</label>
-                            <input type="email" class="form-control" id="clientFormFullName" aria-describedby="fullName" placeholder="Enter full name" name="name">
+                            <?php echo $this->formRow($form->get('name')); ?>
                         </div>
                         <div class="form-group">
                             <label for="clientFormEmail">Email address</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" id="clientFormEmail" placeholder="Enter email" name="email">
+                            <?php echo $this->formRow($form->get('email')); ?>
                         </div>
-                    </form>
+                        <?php
+                        echo $this->form()->closeTag();
+                        ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" form="clientForm" class="btn btn-primary">Submit</button>
+                    <?php echo $this->formSubmit($form->get('submit')); ?>
+<!--                    <button type="submit" form="clientForm" class="btn btn-primary">Submit</button>-->
                 </div>
             </div>
         </div>

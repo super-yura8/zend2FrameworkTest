@@ -24,7 +24,7 @@ return array(
             'event' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/event/[:id]',
+                    'route' => '/events/[:id]',
                     'constraints' => array(
                         'id' => '[0-9]+',
                     ),
@@ -32,6 +32,16 @@ return array(
                         'controller' => 'Application\Controller\Event',
                         'action' => 'get',
                         'id' => 1
+                    ),
+                ),
+            ),
+            'clients' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/clients',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Client',
+                        'action' => 'index',
                     ),
                 ),
             ),
@@ -89,7 +99,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Event' => 'Application\Controller\EventController'
+            'Application\Controller\Event' => 'Application\Controller\EventController',
+            'Application\Controller\Client' => 'Application\Controller\ClientController'
         ),
     ),
     'view_manager' => array(

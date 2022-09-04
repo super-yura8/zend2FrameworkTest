@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+use Application\Form\ClientForm;
 use Application\Model\Entity\Event;
 use Doctrine\Common\Collections\Criteria;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -19,11 +20,12 @@ class EventController extends AbstractActionController
 
     public function indexAction()
     {
+        $form = new ClientForm();
         $em = $this->getEntityManager();
         $em = $em->getRepository(Event::class);
         $sort = new Criteria(null, ['date' => 'ASC']);
         $events = $em->matching($sort);
-        return new ViewModel(['events' => $events]);
+        return new ViewModel(['events' => $events, 'form' => $form]);
     }
 
     public function getAction()
