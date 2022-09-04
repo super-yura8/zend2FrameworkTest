@@ -28,10 +28,12 @@ class ClientController extends AbstractActionController
             $form->setInputFilter($client->getInputFilter());
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $em = $this->getEntityManager()->getRepository(Client::class);
+                $em = $this->getEntityManager();
                 $data = $form->getData();
-                if(!is_null($client = $em->findOneBy(['email' => $data['email']]))) {
-                    if($client->getEvent()->getId() == $data['event']) {
+                $repository = $em->getRepository(Client::class);
+                if(!is_null($check = $repository->findOneBy(['email' => $data['email']]))) {
+                    if($check->getEvent()->getId() == $data['event']) {
+                        $this->flashMessenger()->addErrorMessage("There's already a user with this email");
                         return $this->redirect()->toRoute('home');
                     }
                 }
@@ -42,6 +44,9 @@ class ClientController extends AbstractActionController
                 $client->setEvent($event);
                 $em->persist($client);
                 $em->flush();
+                $this->flashMessenger()->addSuccessMessage('The client has been successfully registered');
+            } else {
+                $this->flashMessenger()->addErrorMessage('The form is not valid');
             }
         } else {
             $em = $this->getEntityManager()->getRepository(Client::class);

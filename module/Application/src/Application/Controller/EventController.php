@@ -23,7 +23,12 @@ class EventController extends AbstractActionController
         $form = new ClientForm();
         $em = $this->getEntityManager();
         $em = $em->getRepository(Event::class);
-        $sort = new Criteria(null, ['date' => 'ASC']);
+        $gteTime = new \DateTime();
+        $lteTime = new \DateTime();
+        $lteTime->modify('+7 days 23:59');
+
+        $sort = Criteria::create()->where(Criteria::expr()->gte('date',$gteTime))->andWhere(Criteria::expr()->lte('date', $lteTime))->orderBy(['date' => 'ASC']);
+
         $events = $em->matching($sort);
         return new ViewModel(['events' => $events, 'form' => $form]);
     }

@@ -1,5 +1,50 @@
 <div class="row">
     <?php
+    $messagesError = $this->flashMessenger()->getErrorMessages();
+    if (isset($messagesError)) {
+            foreach ($messagesError as $message){
+                ?>
+    <div class="alert alert-danger" role="alert">
+        <div class="container">
+            <div class="alert-icon">
+                <i class="zmdi zmdi-alert-circle-o"></i>
+            </div>
+            <strong><?php echo $message;?></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="zmdi zmdi-close"></i>
+                        </span>
+            </button>
+        </div>
+    </div>
+                <?php
+            }
+        }
+    ?>
+
+    <?php
+    $messagesSuccess = $this->flashMessenger()->getSuccessMessages();
+    if (isset($messagesSuccess)) {
+        foreach ($messagesSuccess as $message){
+            ?>
+            <div class="alert alert-success" role="alert">
+                <div class="container">
+                    <div class="alert-icon">
+                        <i class="zmdi zmdi-alert-circle-o"></i>
+                    </div>
+                    <strong><?php echo $message;?></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="zmdi zmdi-close"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <?php
+        }
+    }
+    ?>
+    <?php
     foreach ($events as $event) {
     ?>
     <div class="col-md-4 event" data-id="<?php echo $event->getId()?>">

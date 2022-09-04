@@ -5,10 +5,17 @@ namespace Application\Model\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
-use Zend\InputFilter\Factory as InputFactory;     // <-- Add this import
-use Zend\InputFilter\InputFilter;                 // <-- Add this import
-use Zend\InputFilter\InputFilterAwareInterface;   // <-- Add this import
+use Zend\InputFilter\Factory as InputFactory;
+
+// <-- Add this import
+use Zend\InputFilter\InputFilter;
+
+// <-- Add this import
+use Zend\InputFilter\InputFilterAwareInterface;
+
+// <-- Add this import
 use Zend\InputFilter\InputFilterInterface;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="client")
@@ -39,7 +46,6 @@ class Client implements InputFilterAwareInterface
     private $event;
 
     protected $inputFilter;
-
 
 
     public function getId()
@@ -92,61 +98,51 @@ class Client implements InputFilterAwareInterface
     {
         if (!$this->inputFilter) {
             $inputFilter = new InputFilter();
-            $factory     = new InputFactory();
+            $factory = new InputFactory();
 
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'email',
+                'name' => 'email',
                 'required' => true,
-                'filters'  => array(
+                'filters' => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
                 ),
                 'validators' => array(
                     array(
-                        'name'    => 'StringLength',
+                        'name' => 'EmailAddress',
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'name',
+                'required' => true,
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
+                            'min' => 1,
+                            'max' => 100,
                         ),
                     ),
                 ),
             )));
 
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'name',
+                'name' => 'event',
                 'required' => true,
-                'filters'  => array(
+                'filters' => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
                 ),
                 'validators' => array(
                     array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
-                        ),
-                    ),
-                ),
-            )));
-
-            $inputFilter->add($factory->createInput(array(
-                'name'     => 'event',
-                'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
-                        ),
+                        'name' => 'NotEmpty',
                     ),
                 ),
             )));
